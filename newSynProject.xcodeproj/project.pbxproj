@@ -17,6 +17,7 @@
 		753CDF2C1FD0C0F4005BDCCB /* newSynProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CDF2B1FD0C0F4005BDCCB /* newSynProjectTests.swift */; };
 		753CDF371FD0C0F4005BDCCB /* newSynProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CDF361FD0C0F4005BDCCB /* newSynProjectUITests.swift */; };
 		753CDF491FD72757005BDCCB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CDF481FD72757005BDCCB /* ProfileViewController.swift */; };
+		75DC622F1FDB0905007489A9 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75DC622E1FDB0905007489A9 /* ApiKeys.plist */; };
 		B4847982399BD5720459B742 /* Pods_newSynProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D66C3122EAFAEC98BE39B960 /* Pods_newSynProject.framework */; };
 		C092E2833A64E5A7C6C160FD /* Pods_newSynProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1132EBB3AFD15FF1E4BD1F35 /* Pods_newSynProjectUITests.framework */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		753CDF361FD0C0F4005BDCCB /* newSynProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newSynProjectUITests.swift; sourceTree = "<group>"; };
 		753CDF381FD0C0F4005BDCCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		753CDF481FD72757005BDCCB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		75DC622E1FDB0905007489A9 /* ApiKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		90064287E086261AB3B8B82F /* Pods-newSynProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newSynProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newSynProject/Pods-newSynProject.debug.xcconfig"; sourceTree = "<group>"; };
 		A218BD94CD377A8F87896D63 /* Pods-newSynProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newSynProjectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newSynProjectUITests/Pods-newSynProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BF468B80A2F90A81601BAB37 /* Pods-newSynProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newSynProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-newSynProject/Pods-newSynProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				753CDF1F1FD0C0F3005BDCCB /* LaunchScreen.storyboard */,
 				753CDF221FD0C0F3005BDCCB /* Info.plist */,
 				753CDF1A1FD0C0F3005BDCCB /* newSynProject.xcdatamodeld */,
+				75DC622E1FDB0905007489A9 /* ApiKeys.plist */,
 			);
 			path = newSynProject;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				753CDF211FD0C0F3005BDCCB /* LaunchScreen.storyboard in Resources */,
+				75DC622F1FDB0905007489A9 /* ApiKeys.plist in Resources */,
 				753CDF1E1FD0C0F3005BDCCB /* Assets.xcassets in Resources */,
 				753CDF191FD0C0F3005BDCCB /* Main.storyboard in Resources */,
 			);

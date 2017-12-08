@@ -109,13 +109,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZn-8k-bBV">
-                                <rect key="frame" x="37" y="210" width="234" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxW-C3-dxz">
                                 <rect key="frame" x="37" y="600" width="109" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -124,15 +117,22 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="sc6-OG-BN5"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZn-8k-bBV">
+                                <rect key="frame" x="37" y="210" width="234" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="h6X-fL-zew"/>
                     </view>
                     <connections>
-                        <outlet property="userEmailLabel" destination="TfR-rH-Rko" id="2Lx-UE-F3Y"/>
-                        <outlet property="userIdLabel" destination="0Rp-sv-hNl" id="cqe-54-ZXY"/>
-                        <outlet property="userPhoneLabel" destination="pZn-8k-bBV" id="Tsh-ZA-c6L"/>
-                        <outlet property="usernameLabel" destination="X1t-IJ-Ybs" id="B7a-jS-Gdt"/>
+                        <outlet property="userEmailLabel" destination="TfR-rH-Rko" id="1d7-Bx-aDL"/>
+                        <outlet property="userIdLabel" destination="0Rp-sv-hNl" id="ZGe-VU-Fzo"/>
+                        <outlet property="userPhoneLabel" destination="pZn-8k-bBV" id="rEj-Pn-1wd"/>
+                        <outlet property="usernameLabel" destination="X1t-IJ-Ybs" id="yW5-RR-Kb8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gjb-mn-NsX" userLabel="First Responder" sceneMemberID="firstResponder"/>

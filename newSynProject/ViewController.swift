@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 
 
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var userEmailTextField: UITextField!
@@ -18,13 +19,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var userPhoneTextField: UITextField!
     
-    var userResponse : [String:Any]?
+    var userResponse : [String:Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    //display alert messages
+    // Displays alert messages
     func displayAlert(showMessage:String)-> Void {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: "Alert", message: showMessage, preferredStyle: .alert)
@@ -42,38 +43,42 @@ class ViewController: UIViewController {
         }
     }
     
-    func credentials() -> [String: String] {
-        //header for API - Throw this outside when refacoring
-        let headers: HTTPHeaders = [
-            "X-SP-GATEWAY": "client_id_rAglb9TMLoHRCYZtQe0DdKu25FVaP8W1736XvInB|client_secret_GCDiJFYxcXsW4HOMUtTgqVmZ7dv8ahQp3zbR6NAI",
-            "X-SP-USER": "|e83cf6ddcf778e37bfe3d48fc78a6502062fc",
-            "X-SP-USER-IP": "2601:646:c202:2e20:6de5:b494:73b6:d98b"
-        ]
-        return headers
+    // Grabs API keys from secret file
+    func valueForAPIKey(named keyname:String) -> String {
+        
+        let filePath = Bundle.main.path(forResource: "ApiKeys", ofType: "plist")
+        let plist = NSDictionary(contentsOfFile:filePath!)
+        let value = plist?.object(forKey: keyname) as! String
+        return value
     }
     
-    func validate(create: () -> ()){
-        //If this breaks when you throw it outside, just keep it in
-        //Validate to make sure fields are not empty
+    
+    // Validates text fields to ensure they are not empty
+    func confirmTextFieldsAreFilled()-> Bool{
         if ((userNameTextField.text == nil || (userNameTextField.text?.isEmpty)!) ||
             (userEmailTextField.text == nil || (userEmailTextField.text?.isEmpty)!) ||
             (userPasswordTextField.text == nil || (userPasswordTextField.text?.isEmpty)!) ||
             (confirmPasswordTextField.text == nil || (confirmPasswordTextField.text?.isEmpty)!) ||
             (userPhoneTextField.text == nil || (userPhoneTextField.text?.isEmpty)!))
         {
-            return displayAlert(showMessage: "Please fill in all fields")
-            
-        //Validate to see if passwords are the same
-        } else if ((userPasswordTextField.text?.elementsEqual(confirmPasswordTextField.text!)) != true) {
-            return displayAlert(showMessage: "Passwords do not match")
+            displayAlert(showMessage: "Please fill in all fields")
+            return false
         } else {
-            create()
+            return true
         }
     }
     
-    func createUser(cred:()){
-        //Throw this outside of the function and make sure to add parameters as a parameter for the function
-        //object for the request
+    // Validates password - checks if they are the same
+    func confirmPassword()-> Bool {
+      if ((userPasswordTextField.text?.elementsEqual(confirmPasswordTextField.text!)) != true) {
+            displayAlert(showMessage: "Passwords do not match")
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func createUser(){
         let parameters : Parameters = [
             "logins": [
                 ["email" : userEmailTextField.text!]
@@ -86,35 +91,54 @@ class ViewController: UIViewController {
             ]
         ]
         
-        // Throw this into a secrets folder and gitignore 
+        // Alamofire headers
+        let SPGATEWAY = valueForAPIKey(named:"GATEWAY")
+        let SPUSER = valueForAPIKey(named: "USER")
+        let SPUSERIP = valueForAPIKey(named: "USER-IP")
+        
         let headers: HTTPHeaders = [
-            "X-SP-GATEWAY": "client_id_rAglb9TMLoHRCYZtQe0DdKu25FVaP8W1736XvInB|client_secret_GCDiJFYxcXsW4HOMUtTgqVmZ7dv8ahQp3zbR6NAI",
-            "X-SP-USER": "|e83cf6ddcf778e37bfe3d48fc78a6502062fc",
-            "X-SP-USER-IP": "2601:646:c202:2e20:6de5:b494:73b6:d98b"
+            "X-SP-GATEWAY": SPGATEWAY,
+            "X-SP-USER": SPUSER,
+            "X-SP-USER-IP": SPUSERIP
         ]
-            //api call
+        
+        // Call to synaspefi API
         let urlString : String = "https://uat-api.synapsefi.com/v3.1/users"
-
-        Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        
+        if self.confirmPassword() == true && self.confirmTextFieldsAreFilled() == true {
+            Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                 let jsonData = response.result.value as! [String:AnyObject]
-                //                    print("**********************************")
-                //                    print (jsonData["_id"]!,jsonData["legal_names"]!,jsonData["phone_numbers"]!)
-                //                    print("**********************************")
-            self.userResponse = jsonData
-            self.performSegue(withIdentifier: "profileView", sender: self)
+                self.userResponse = jsonData
+                self.performSegue(withIdentifier: "profileView", sender: self)
+            }
+        } else {
+            displayAlert(showMessage: "")
+            return
         }
     }
     
-    //register button that sends data back
+    // Register button that sends data to profile
     @IBAction func regButtonPressed(_ sender: UIButton) {
         print("Register button pressed *******************")
-        validate(create: createUser(cred:) as () -> ())
+        self.createUser()
+    }
+    
+    // Checks if segue should occur - requires extra validation of form fields
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "profileView" {
+            if self.confirmPassword() == true && self.confirmTextFieldsAreFilled() == true {
+                return true
+            } else {
+                displayAlert(showMessage: "Something went wrong please try again")
+            }
+        }
+        return false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "profileView"{
             let destinationVC = segue.destination as! ProfileViewController
-            destinationVC.setUserData(data : self.userResponse)
+            destinationVC.setUserData(data: self.userResponse)
         }
     }
     
@@ -125,3 +149,4 @@ class ViewController: UIViewController {
 
 
 }
+
