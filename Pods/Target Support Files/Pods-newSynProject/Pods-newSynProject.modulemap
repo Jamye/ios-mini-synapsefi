@@ -1,0 +1,6 @@
+framework module Pods_newSynProject {
+  umbrella header "Pods-newSynProject-umbrella.h"
+
+  export *
+  module * { export * }
+}

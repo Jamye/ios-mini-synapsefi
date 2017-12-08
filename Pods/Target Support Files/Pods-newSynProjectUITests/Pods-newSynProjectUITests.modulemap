@@ -1,0 +1,6 @@
+framework module Pods_newSynProjectUITests {
+  umbrella header "Pods-newSynProjectUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
