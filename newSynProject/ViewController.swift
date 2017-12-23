@@ -13,12 +13,14 @@ import Alamofire
 
 class ViewController: UIViewController {
     
+    //input fields
     @IBOutlet weak var userEmailTextField: UITextField!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var userPasswordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var userPhoneTextField: UITextField!
     
+    //data object
     var userResponse : [String:Any] = [:]
     
     override func viewDidLoad() {
@@ -30,6 +32,7 @@ class ViewController: UIViewController {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: "Alert", message: showMessage, preferredStyle: .alert)
             
+            //allows for action within the alert
             let alertAction = UIAlertAction (title: "Ok", style: .default)
             {(action:UIAlertAction!) in
                 print("okay button pressed")
@@ -109,7 +112,7 @@ class ViewController: UIViewController {
             Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                 let jsonData = response.result.value as! [String:AnyObject]
                 self.userResponse = jsonData
-                self.performSegue(withIdentifier: "profileView", sender: self)
+                self.performSegue(withIdentifier: "profileView2", sender: self) //performs the segue
             }
         } else {
             displayAlert(showMessage: "")
@@ -124,6 +127,8 @@ class ViewController: UIViewController {
     }
     
     // Checks if segue should occur - requires extra validation of form fields
+    // called immediately before the segue actually happens
+    //allow the segue to actually happen
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "profileView" {
             if self.confirmPassword() == true && self.confirmTextFieldsAreFilled() == true {
@@ -135,8 +140,11 @@ class ViewController: UIViewController {
         return false
     }
     
+    //notifies the view controller that the segue is about to be performed
+    //called when a segue is about to be performed
+    //prepares the data to be passed
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "profileView"{
+        if segue.identifier == "profileView2"{
             let destinationVC = segue.destination as! ProfileViewController
             destinationVC.setUserData(data: self.userResponse)
         }
