@@ -18,6 +18,8 @@
 		753CDF371FD0C0F4005BDCCB /* newSynProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CDF361FD0C0F4005BDCCB /* newSynProjectUITests.swift */; };
 		753CDF491FD72757005BDCCB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CDF481FD72757005BDCCB /* ProfileViewController.swift */; };
 		754C20801FEAF33C006AB58C /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 754C207F1FEAF33C006AB58C /* ApiKeys.plist */; };
+		75A9A4C51FEF4430000F4A29 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9A4C41FEF4430000F4A29 /* FindViewController.swift */; };
+		75A9A4C71FF0D7E6000F4A29 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9A4C61FF0D7E6000F4A29 /* UserInfoViewController.swift */; };
 		B4847982399BD5720459B742 /* Pods_newSynProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D66C3122EAFAEC98BE39B960 /* Pods_newSynProject.framework */; };
 		C092E2833A64E5A7C6C160FD /* Pods_newSynProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1132EBB3AFD15FF1E4BD1F35 /* Pods_newSynProjectUITests.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +61,8 @@
 		753CDF381FD0C0F4005BDCCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		753CDF481FD72757005BDCCB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		754C207F1FEAF33C006AB58C /* ApiKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
+		75A9A4C41FEF4430000F4A29 /* FindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindViewController.swift; sourceTree = "<group>"; };
+		75A9A4C61FF0D7E6000F4A29 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		90064287E086261AB3B8B82F /* Pods-newSynProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newSynProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newSynProject/Pods-newSynProject.debug.xcconfig"; sourceTree = "<group>"; };
 		A218BD94CD377A8F87896D63 /* Pods-newSynProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newSynProjectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newSynProjectUITests/Pods-newSynProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BF468B80A2F90A81601BAB37 /* Pods-newSynProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newSynProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-newSynProject/Pods-newSynProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 				753CDF131FD0C0F3005BDCCB /* AppDelegate.swift */,
 				753CDF151FD0C0F3005BDCCB /* ViewController.swift */,
 				753CDF481FD72757005BDCCB /* ProfileViewController.swift */,
+				75A9A4C41FEF4430000F4A29 /* FindViewController.swift */,
+				75A9A4C61FF0D7E6000F4A29 /* UserInfoViewController.swift */,
 				753CDF171FD0C0F3005BDCCB /* Main.storyboard */,
 				753CDF1D1FD0C0F3005BDCCB /* Assets.xcassets */,
 				753CDF1F1FD0C0F3005BDCCB /* LaunchScreen.storyboard */,
@@ -468,6 +474,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75A9A4C51FEF4430000F4A29 /* FindViewController.swift in Sources */,
+				75A9A4C71FF0D7E6000F4A29 /* UserInfoViewController.swift in Sources */,
 				753CDF161FD0C0F3005BDCCB /* ViewController.swift in Sources */,
 				753CDF1C1FD0C0F3005BDCCB /* newSynProject.xcdatamodeld in Sources */,
 				753CDF141FD0C0F3005BDCCB /* AppDelegate.swift in Sources */,
