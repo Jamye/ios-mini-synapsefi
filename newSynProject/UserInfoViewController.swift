@@ -46,7 +46,7 @@ class UserInfoViewController: UITableViewController {
     func reload(){
         self.tableView?.reloadData()
         print ("-----------------------------")
-        print (userInfo)
+//        print (userInfo)
         print ("-----------------------------")
 
     }

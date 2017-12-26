@@ -44,7 +44,13 @@ class ProfileViewController: UIViewController {
         let phoneNumber = self.userData!["phone_numbers"] as! NSArray
         let logins = self.userData!["logins"] as! [[String:Any]]
         let userId = self.userData!["_id"] as! String
+        
+        let userToken = self.userData!["refresh_token"] as! String
 
+        print("#@#@#@@#@#@#@#@##@@#@#@#")
+        print (userToken)
+        print("#@#@#@@#@#@#@#@##@@#@#@#")
+        
 //         This is failing due to IBOutlet properties not instantiating - ending up with nil value and cannot unwrap
         
         self.usernameLabel.text = "test"
