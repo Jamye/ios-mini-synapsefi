@@ -13,7 +13,6 @@ import Alamofire
 class ProfileViewController: UIViewController {
     
     @IBAction func docButtonPressed(_ sender: UIButton) {
-        oAuthUser()
     }
     
     @IBOutlet weak var usernameLabel: UILabel!
@@ -28,6 +27,8 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    var userReturnToken: [String:Any]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -35,6 +36,7 @@ class ProfileViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.displayUserDetails()
+        self.oAuthUser()
     }
     
     func setUserData(data: [String:Any]) {
@@ -49,8 +51,6 @@ class ProfileViewController: UIViewController {
         let phoneNumber = self.userData!["phone_numbers"] as! NSArray
         let logins = self.userData!["logins"] as! [[String:Any]]
         let userId = self.userData!["_id"] as! String
-        let userToken = self.userData!["refresh_token"] as! String
-
         
         self.usernameLabel.text = "test"
         self.useridLabel.text = userId
@@ -61,10 +61,9 @@ class ProfileViewController: UIViewController {
     
     func oAuthUser(){
         
-        let rfToken = self.userData!["refresh_token"] as! String
-
+        let userToken = self.userData!["refresh_token"] as! String
         let parameters : Parameters = [
-            "refresh_token": rfToken
+            "refresh_token": userToken
         ]
         
         // Alamofire headers
@@ -87,9 +86,10 @@ class ProfileViewController: UIViewController {
 
         Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             let jsonData = response.result.value as! [String:AnyObject]
-            print("#@#@#@@#@#@#@#@##@@#@#@#")
-            print (jsonData)
-            print("#@#@#@@#@#@#@#@##@@#@#@#")
+//            print("#@#@#@@#@#@#@#@##@@#@#@#")
+//            print (jsonData)
+            self.userReturnToken = jsonData
+//            print("#@#@#@@#@#@#@#@##@@#@#@#")
         }
         
     }
@@ -103,6 +103,7 @@ class ProfileViewController: UIViewController {
         if segue.identifier == "addUserDocs"{
             let addDocsDestinationVC = segue.destination as! AddDocsViewController
             addDocsDestinationVC.userRes = userData
+            addDocsDestinationVC.userAuthToken = userReturnToken
         }
     }
     
