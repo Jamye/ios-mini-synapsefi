@@ -30,10 +30,11 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
     @IBOutlet weak var countryField: UITextField!
     
     @IBOutlet weak var genderDropDown: UIPickerView!
+    @IBOutlet weak var entityScopeDropDown: UIPickerView!
     
     
     //picker for gender
-    var gender = ["Male", "Femle", "Other"]
+    var gender = ["M", "F"]
     var eScope = ["Arts & Entertainment","Not Known","Business Services","Organization"]
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -45,14 +46,21 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         if pickerView == genderDropDown {
             countRows = self.gender.count
         }
+        else if pickerView == entityScopeDropDown {
+            countRows = self.eScope.count
+        }
         return countRows
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == genderDropDown {
             let genderRow = gender[row]
-            
             return genderRow
+        }
+        else if pickerView == entityScopeDropDown {
+            let scopeRow = eScope[row]
+            return scopeRow
         }
         return ""
     }
@@ -62,11 +70,18 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
             self.entityTypeField.text = self.gender[row]
             self.genderDropDown.isHidden = true
         }
+        else if pickerView == entityScopeDropDown{
+            self.entityScopeField.text = self.eScope[row]
+            self.entityScopeDropDown.isHidden = true
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if (textField == self.entityTypeField){
             self.genderDropDown.isHidden = false
+        }
+        else if (textField == self.entityScopeField){
+            self.entityScopeDropDown.isHidden = false
         }
     }
     
@@ -90,8 +105,8 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
                   "phone_number": phoneField.text,
                   "ip":"123.123.123",
                   "name":nameField.text,
-                  "entity_type":"M",
-                  "entity_scope":"Arts & Entertainment",
+                  "entity_type":entityTypeField.text!,
+                  "entity_scope":entityScopeField.text!,
                   "day":bdayDay,
                   "month":bdayMonth,
                   "year":bdayYear,
@@ -138,6 +153,11 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
     
     
     @IBAction func submitButtonPressed(_ sender: UIButton) {
+        print("#@#@#@@#Excliam@#@#@#@##@@#@#@#")
+        print (entityTypeField.text!)
+        print("#@#@#@@#@#@Question#@#@##@@#@#@#")
+        print (entityTypeField.text! as String)
+
         updateUser()
     }
 
