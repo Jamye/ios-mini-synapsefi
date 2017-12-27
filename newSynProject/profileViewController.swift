@@ -6,9 +6,15 @@
 //  Copyright © 2017 James Ye. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import Alamofire
 
 class ProfileViewController: UIViewController {
+    
+    @IBAction func docButtonPressed(_ sender: UIButton) {
+        oAuthUser()
+    }
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var useremailLabel: UILabel!
@@ -19,7 +25,6 @@ class ProfileViewController: UIViewController {
         //execute code when property is set
         didSet {
             print ("This variable has been set")
-            
         }
     }
     
@@ -44,14 +49,8 @@ class ProfileViewController: UIViewController {
         let phoneNumber = self.userData!["phone_numbers"] as! NSArray
         let logins = self.userData!["logins"] as! [[String:Any]]
         let userId = self.userData!["_id"] as! String
-        
         let userToken = self.userData!["refresh_token"] as! String
 
-        print("#@#@#@@#@#@#@#@##@@#@#@#")
-        print (userToken)
-        print("#@#@#@@#@#@#@#@##@@#@#@#")
-        
-//         This is failing due to IBOutlet properties not instantiating - ending up with nil value and cannot unwrap
         
         self.usernameLabel.text = "test"
         self.useridLabel.text = userId
@@ -59,9 +58,52 @@ class ProfileViewController: UIViewController {
         self.userphLabel.text = phoneNumber[0] as? String
     }
 
+    
+    func oAuthUser(){
+        
+        let rfToken = self.userData!["refresh_token"] as! String
+
+        let parameters : Parameters = [
+            "refresh_token": rfToken
+        ]
+        
+        // Alamofire headers
+        let SPGATEWAY = ViewController().valueForAPIKey(named:"GATEWAY")
+        let SPUSER = ViewController().valueForAPIKey(named: "USER")
+        let SPUSERIP = ViewController().valueForAPIKey(named: "USER-IP")
+        
+        let headers: HTTPHeaders = [
+            "X-SP-GATEWAY": SPGATEWAY,
+            "X-SP-USER": SPUSER,
+            "X-SP-USER-IP": SPUSERIP
+        ]
+        
+        // Call to synaspefi API for oAuth
+        let apiUrlString : String = "https://uat-api.synapsefi.com/v3.1/oauth/"
+        let createdUserId = self.userData!["_id"] as! String
+
+        let urlString = apiUrlString + createdUserId
+    
+
+        Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            let jsonData = response.result.value as! [String:AnyObject]
+            print("#@#@#@@#@#@#@#@##@@#@#@#")
+            print (jsonData)
+            print("#@#@#@@#@#@#@#@##@@#@#@#")
+        }
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addUserDocs"{
+            let addDocsDestinationVC = segue.destination as! AddDocsViewController
+            addDocsDestinationVC.userRes = userData
+        }
+    }
+    
 }
