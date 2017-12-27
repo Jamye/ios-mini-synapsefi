@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Alamofire
 
-class AddDocsViewController: UITableViewController {
+class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     var userRes: [String:Any]?
     var userAuthToken: [String:Any]?
@@ -28,6 +28,49 @@ class AddDocsViewController: UITableViewController {
     @IBOutlet weak var stateField: UIView!
     @IBOutlet weak var zipField: UITextField!
     @IBOutlet weak var countryField: UITextField!
+    
+    @IBOutlet weak var genderDropDown: UIPickerView!
+    
+    
+    //picker for gender
+    var gender = ["Male", "Femle", "Other"]
+    var eScope = ["Arts & Entertainment","Not Known","Business Services","Organization"]
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        var countRows: Int = gender.count
+        if pickerView == genderDropDown {
+            countRows = self.gender.count
+        }
+        return countRows
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == genderDropDown {
+            let genderRow = gender[row]
+            
+            return genderRow
+        }
+        return ""
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == genderDropDown {
+            self.entityTypeField.text = self.gender[row]
+            self.genderDropDown.isHidden = true
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if (textField == self.entityTypeField){
+            self.genderDropDown.isHidden = false
+        }
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
