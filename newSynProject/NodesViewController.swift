@@ -12,6 +12,8 @@ import Alamofire
 
 class NodesViewController: UITableViewController {
     
+    @IBOutlet weak var nicknameTextField: UITextField!
+    
     var docResponse: [String:Any]?
     var authToken: [String:Any]?
     
@@ -29,12 +31,12 @@ class NodesViewController: UITableViewController {
         let parameters: Parameters = [
             "type":"DEPOSIT-US",
             "info":[
-                "nickname": "My Checking"
+                "nickname": nicknameTextField.text!
             ]
         ]
         
         // Alamofire headers
-        let SPGATEWAY = ViewController().valueForAPIKey(named:"GATEWAY")
+//        let SPGATEWAY = ViewController().valueForAPIKey(named:"GATEWAY")
         let SPUSER = ViewController().valueForAPIKey(named: "USER")
         let SPUSERIP = ViewController().valueForAPIKey(named: "USER-IP")
         
