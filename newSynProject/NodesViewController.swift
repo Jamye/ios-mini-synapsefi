@@ -12,6 +12,10 @@ import Alamofire
 
 class NodesViewController: UITableViewController {
     
+    @IBAction func depositActButtonPressed(_ sender: UIButton) {
+        createDepositNode()
+    }
+    
     @IBOutlet weak var nicknameTextField: UITextField!
     
     var docResponse: [String:Any]?
@@ -24,7 +28,7 @@ class NodesViewController: UITableViewController {
 //        print("__##_#_#_#_#__#_#__#_#_#")
 //        print(authToken!)
         
-        createDepositNode()
+
     }
     
     func createDepositNode(){
