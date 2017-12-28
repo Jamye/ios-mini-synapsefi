@@ -14,6 +14,7 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
     
     var userRes: [String:Any]?
     var userAuthToken: [String:Any]?
+    var apiDocResponse: Any?
     
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
@@ -109,7 +110,6 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
                   "address_subdivision":stateField.text!,
                   "address_postal_code":zipField.text!,
                   "address_country_code":countryField.text!]]
-            
         ]
         
         // Alamofire headers
@@ -155,8 +155,10 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
                 }
             case .success(let value):
                 // handle success here
-                print (value)
+//                print (value)
+                self.apiDocResponse = value
                 self.errorLabel.text! = "Success"
+                self.performSegue(withIdentifier: "nodeView", sender: self)
                 return
 //                self.userReturnResponse = value as! [String : Any]
 //                self.performSegue(withIdentifier: "showUser", sender: self)
@@ -175,9 +177,8 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
                 print("okay button pressed")
                 DispatchQueue.main.async
                     {
-//                        self.dismiss(animated: true, completion:nil)
                         return
-                }
+                    }
             }
             alertController.addAction(alertAction)
             self.present(alertController, animated: true,completion: nil)
@@ -226,18 +227,22 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         }
         return true
     }
-    
-    
 
     
     @IBAction func submitButtonPressed(_ sender: UIButton) {
-//        print("#@#@#@@#Excliam@#@#@#@##@@#@#@#")
-//        print (entityTypeField.text!)
-//        print("#@#@#@@#@#@Question#@#@##@@#@#@#")
+        print ("Submit button press @#@#@#@#@#@#@#@#@#@#@")
         if confirmTextFieldsAreNotEmpty() == false || characterFieldLengthCheck() == false {
             showAlert(showMessage: "")
         } else {
             updateUser()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "nodeView"{
+            let nodeDestinationVC = segue.destination as! NodesViewController
+            nodeDestinationVC.docResponse = apiDocResponse
+            nodeDestinationVC.authToken = userAuthToken
         }
     }
 
