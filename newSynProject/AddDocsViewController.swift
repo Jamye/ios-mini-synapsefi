@@ -15,6 +15,7 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
     var userRes: [String:Any]?
     var userAuthToken: [String:Any]?
     
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var phoneField: UITextField!
@@ -28,12 +29,14 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
     @IBOutlet weak var stateField: UITextField!
     @IBOutlet weak var zipField: UITextField!
     @IBOutlet weak var countryField: UITextField!
-    
     @IBOutlet weak var genderDropDown: UIPickerView!
     @IBOutlet weak var entityScopeDropDown: UIPickerView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
-    //picker for gender
+    //Fuctions that handle the pickerView for entity type and entity scope
     var gender = ["M", "F"]
     var eScope = ["Arts & Entertainment","Not Known","Business Services","Organization"]
     
@@ -84,13 +87,7 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         }
     }
 
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
-    
+    //handles the api call
     func updateUser(){
         var bdayMonth :Int? = Int(dobMonthField.text!)
         var bdayDay :Int? = Int(dobDayField.text!)
@@ -129,23 +126,45 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
             "X-SP-USER-IP": SPUSERIP
         ]
         
-        // Call to synaspefi API
+        // creates the url string
         let id = self.userRes!["_id"] as! String
         let apiString = "https://uat-api.synapsefi.com/v3.1/users/"
         let searchId = id
         
         let urlString : String = apiString + searchId
         
-        Alamofire.request(urlString, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON {
+        //handles the api call
+        Alamofire.request(urlString, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON {
             response in
-            debugPrint(response)
-            print("##############################")
-            print (response)
-            print("##############################")
+//                debugPrint(response)
+//                print("##############################")
+//                print (response)
+//                print("##############################")
+            switch response.result {
+            case .failure(let status):
+//                handle errors (including `validate` errors) here
+                print (status)
+                if let statusCode = response.response?.statusCode {
+                    print (statusCode)
+                    if statusCode == 409 {
+                        self.errorLabel.text! = "Please enter full name with space"
+                    } else {
+                        self.errorLabel.text! = "Something went wrong, please try again later"
+                    }
+                    return
+                }
+            case .success(let value):
+                // handle success here
+                print (value)
+                self.errorLabel.text! = "Success"
+                return
+//                self.userReturnResponse = value as! [String : Any]
+//                self.performSegue(withIdentifier: "showUser", sender: self)
+            }
         }
     }
     
-    //alert pop up check
+    //Function for the alert popup
     func showAlert(showMessage:String)-> Void {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: "Alert", message: showMessage, preferredStyle: .alert)
@@ -156,7 +175,8 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
                 print("okay button pressed")
                 DispatchQueue.main.async
                     {
-                        self.dismiss(animated: true, completion:nil)
+//                        self.dismiss(animated: true, completion:nil)
+                        return
                 }
             }
             alertController.addAction(alertAction)
@@ -164,6 +184,7 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         }
     }
     
+    //Function that checks for empty and nil fields
     func confirmTextFieldsAreNotEmpty()-> Bool{
         if ((emailField.text == nil || (emailField.text?.isEmpty)!) ||
             (phoneField.text == nil || (phoneField.text?.isEmpty)!) ||
@@ -171,13 +192,13 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
             (entityTypeField.text == nil || (entityTypeField.text?.isEmpty)!) ||
             (entityScopeField.text == nil || (entityScopeField.text?.isEmpty)!) ||
             (dobMonthField.text == nil || (dobMonthField.text?.isEmpty)!) ||
-                        (dobDayField.text == nil || (dobDayField.text?.isEmpty)!) ||
-                        (dobYearField.text == nil || (dobYearField.text?.isEmpty)!) ||
-                        (addressField.text == nil || (addressField.text?.isEmpty)!) ||
+            (dobDayField.text == nil || (dobDayField.text?.isEmpty)!) ||
+            (dobYearField.text == nil || (dobYearField.text?.isEmpty)!) ||
+            (addressField.text == nil || (addressField.text?.isEmpty)!) ||
             (cityField.text == nil || (cityField.text?.isEmpty)!) ||
             (stateField.text == nil || (stateField.text?.isEmpty)!) ||
-            (nameField.text == nil || (nameField.text?.isEmpty)!) ||
-            (dobDayField.text == nil || (dobDayField.text?.isEmpty)!))
+            (zipField.text == nil || (zipField.text?.isEmpty)!) ||
+            (countryField.text == nil || (countryField.text?.isEmpty)!))
         {
             showAlert(showMessage: "Please fill in all fields")
             return false
@@ -186,19 +207,40 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         }
     }
     
+    func characterFieldLengthCheck()->Bool{
+        if stateField.text!.count != 2 {
+            showAlert(showMessage: "State must be two characters long")
+            return false
+        } else if countryField.text?.count != 2 {
+            showAlert(showMessage: "Country must be two characters long")
+            return false
+        } else if dobMonthField.text?.count != 2 {
+            showAlert(showMessage: "Birthday month must be two characters long")
+            return false
+        } else if dobDayField.text?.count != 2 {
+            showAlert(showMessage: "Birthday date must be two characters long")
+            return false
+        } else if dobYearField.text?.count != 4 {
+            showAlert(showMessage: "Birth year must be four characters long")
+            return false
+        }
+        return true
+    }
     
     
+
     
     @IBAction func submitButtonPressed(_ sender: UIButton) {
 //        print("#@#@#@@#Excliam@#@#@#@##@@#@#@#")
 //        print (entityTypeField.text!)
 //        print("#@#@#@@#@#@Question#@#@##@@#@#@#")
-
-        updateUser()
+        if confirmTextFieldsAreNotEmpty() == false || characterFieldLengthCheck() == false {
+            showAlert(showMessage: "")
+        } else {
+            updateUser()
+        }
     }
 
-
-    
     override func viewWillAppear(_ animated: Bool) {
     }
     
