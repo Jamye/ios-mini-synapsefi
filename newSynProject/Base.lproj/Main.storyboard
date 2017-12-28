@@ -740,7 +740,7 @@
                         <outlet property="genderDropDown" destination="SW6-1f-dod" id="Nkl-Zq-77n"/>
                         <outlet property="nameField" destination="CTd-7p-yoe" id="DT5-PF-oWQ"/>
                         <outlet property="phoneField" destination="DeJ-A6-uER" id="bgY-gJ-RaQ"/>
-                        <outlet property="stateField" destination="ECb-Un-b2o" id="M8r-n3-85i"/>
+                        <outlet property="stateField" destination="9Dz-OZ-4BK" id="vkm-cp-CKr"/>
                         <outlet property="zipField" destination="Zw2-mr-Axk" id="hPY-BH-NKW"/>
                     </connections>
                 </tableViewController>

@@ -25,7 +25,7 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
     @IBOutlet weak var dobYearField: UITextField!
     @IBOutlet weak var addressField: UITextField!
     @IBOutlet weak var cityField: UITextField!
-    @IBOutlet weak var stateField: UIView!
+    @IBOutlet weak var stateField: UITextField!
     @IBOutlet weak var zipField: UITextField!
     @IBOutlet weak var countryField: UITextField!
     
@@ -50,7 +50,6 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
             countRows = self.eScope.count
         }
         return countRows
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -84,15 +83,13 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
             self.entityScopeDropDown.isHidden = false
         }
     }
-    
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
-    
-    var myDict = [String:String]()
     
     func updateUser(){
         var bdayMonth :Int? = Int(dobMonthField.text!)
@@ -101,20 +98,20 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         
         let parameters: Parameters = [
             "documents":
-                [["email": emailField.text,
-                  "phone_number": phoneField.text,
+                [["email": emailField.text!,
+                  "phone_number": phoneField.text!,
                   "ip":"123.123.123",
-                  "name":nameField.text,
+                  "name":nameField.text!,
                   "entity_type":entityTypeField.text!,
                   "entity_scope":entityScopeField.text!,
-                  "day":bdayDay,
-                  "month":bdayMonth,
-                  "year":bdayYear,
-                  "address_street":addressField.text,
-                  "address_city":cityField.text,
-                  "address_subdivision":cityField.text,
-                  "address_postal_code":zipField.text,
-                  "address_country_code":countryField.text]]
+                  "day":bdayDay!,
+                  "month":bdayMonth!,
+                  "year":bdayYear!,
+                  "address_street":addressField.text!,
+                  "address_city":cityField.text!,
+                  "address_subdivision":stateField.text!,
+                  "address_postal_code":zipField.text!,
+                  "address_country_code":countryField.text!]]
             
         ]
         
@@ -134,13 +131,10 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         
         // Call to synaspefi API
         let id = self.userRes!["_id"] as! String
-        
         let apiString = "https://uat-api.synapsefi.com/v3.1/users/"
         let searchId = id
         
-        
         let urlString : String = apiString + searchId
-        //        print(urlString)
         
         Alamofire.request(urlString, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON {
             response in
@@ -151,12 +145,54 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         }
     }
     
+    //alert pop up check
+    func showAlert(showMessage:String)-> Void {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Alert", message: showMessage, preferredStyle: .alert)
+            
+            //allows for action within the alert
+            let alertAction = UIAlertAction (title: "Ok", style: .default)
+            {(action:UIAlertAction!) in
+                print("okay button pressed")
+                DispatchQueue.main.async
+                    {
+                        self.dismiss(animated: true, completion:nil)
+                }
+            }
+            alertController.addAction(alertAction)
+            self.present(alertController, animated: true,completion: nil)
+        }
+    }
+    
+    func confirmTextFieldsAreNotEmpty()-> Bool{
+        if ((emailField.text == nil || (emailField.text?.isEmpty)!) ||
+            (phoneField.text == nil || (phoneField.text?.isEmpty)!) ||
+            (nameField.text == nil || (nameField.text?.isEmpty)!) ||
+            (entityTypeField.text == nil || (entityTypeField.text?.isEmpty)!) ||
+            (entityScopeField.text == nil || (entityScopeField.text?.isEmpty)!) ||
+            (dobMonthField.text == nil || (dobMonthField.text?.isEmpty)!) ||
+                        (dobDayField.text == nil || (dobDayField.text?.isEmpty)!) ||
+                        (dobYearField.text == nil || (dobYearField.text?.isEmpty)!) ||
+                        (addressField.text == nil || (addressField.text?.isEmpty)!) ||
+            (cityField.text == nil || (cityField.text?.isEmpty)!) ||
+            (stateField.text == nil || (stateField.text?.isEmpty)!) ||
+            (nameField.text == nil || (nameField.text?.isEmpty)!) ||
+            (dobDayField.text == nil || (dobDayField.text?.isEmpty)!))
+        {
+            showAlert(showMessage: "Please fill in all fields")
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    
+    
     
     @IBAction func submitButtonPressed(_ sender: UIButton) {
-        print("#@#@#@@#Excliam@#@#@#@##@@#@#@#")
-        print (entityTypeField.text!)
-        print("#@#@#@@#@#@Question#@#@##@@#@#@#")
-        print (entityTypeField.text! as String)
+//        print("#@#@#@@#Excliam@#@#@#@##@@#@#@#")
+//        print (entityTypeField.text!)
+//        print("#@#@#@@#@#@Question#@#@##@@#@#@#")
 
         updateUser()
     }
@@ -164,9 +200,6 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
 
     
     override func viewWillAppear(_ animated: Bool) {
-//        print("#@#@#@@#@#@#@#@##@@#@#@#")
-//        print(userAuthToken)
-//        print("#@#@#@@#@#@#@#@##@@#@#@#")
     }
     
 }
