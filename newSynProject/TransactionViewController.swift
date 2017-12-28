@@ -12,8 +12,15 @@ import Alamofire
 
 class TransactionViewController: UITableViewController {
     
+    var nodeResponse: [String:Any]?
+    var nodeAuthToken: [String:Any]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+                print("_______MADE IT TO NODE_______")
+                print(nodeResponse)
+                print("__##_#_#_#_#__#_#__#_#_#")
+                print(nodeAuthToken)
     }
     
 }
