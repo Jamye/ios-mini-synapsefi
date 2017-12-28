@@ -14,7 +14,7 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
     
     var userRes: [String:Any]?
     var userAuthToken: [String:Any]?
-    var apiDocResponse: Any?
+    var apiDocResponse: [String:Any]?
     
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
@@ -156,7 +156,8 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
             case .success(let value):
                 // handle success here
 //                print (value)
-                self.apiDocResponse = value
+                let valueResponse = value as? Dictionary<String, AnyObject>
+                self.apiDocResponse = valueResponse
                 self.errorLabel.text! = "Success"
                 self.performSegue(withIdentifier: "nodeView", sender: self)
                 return
@@ -174,7 +175,6 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
             //allows for action within the alert
             let alertAction = UIAlertAction (title: "Ok", style: .default)
             {(action:UIAlertAction!) in
-                print("okay button pressed")
                 DispatchQueue.main.async
                     {
                         return
