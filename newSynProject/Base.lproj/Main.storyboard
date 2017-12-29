@@ -764,7 +764,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Create The Account" id="bQt-Ul-HgS">
+                            <tableViewSection headerTitle="Create Holding Account" id="bQt-Ul-HgS">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="lRV-98-ENG">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
@@ -809,7 +809,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Section 2" id="2Ui-Yj-lYA">
+                            <tableViewSection headerTitle="Continue" id="2Ui-Yj-lYA">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="LJ1-Ti-kha">
                                         <rect key="frame" x="0.0" y="199.5" width="375" height="44"/>
@@ -917,7 +917,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Continue" id="vb6-xt-Tmf">
+                            <tableViewSection headerTitle="Confirm Funds" id="vb6-xt-Tmf">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="VHQ-a6-k8e">
                                         <rect key="frame" x="0.0" y="243.5" width="375" height="44"/>
@@ -930,7 +930,27 @@
                                                     <rect key="frame" x="254" y="7" width="105" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Confirm"/>
+                                                    <connections>
+                                                        <action selector="confirmButtonPressed:" destination="yfv-Wr-tn1" eventType="touchUpInside" id="7rl-76-qb0"/>
+                                                    </connections>
                                                 </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="rzW-mL-3jA">
+                                        <rect key="frame" x="0.0" y="287.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rzW-mL-3jA" id="ewM-VM-fYs">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hm-ri-Bcx">
+                                                    <rect key="frame" x="25" y="11" width="324" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -942,6 +962,10 @@
                             <outlet property="delegate" destination="yfv-Wr-tn1" id="TCE-cc-fas"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="amountTextField" destination="TcO-bd-xEG" id="l0g-yP-SeB"/>
+                        <outlet property="displayLabel" destination="7hm-ri-Bcx" id="Rzt-wE-k5S"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fex-Zq-6af" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
