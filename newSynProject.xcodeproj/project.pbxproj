@@ -17,12 +17,12 @@
 		753CDF2C1FD0C0F4005BDCCB /* newSynProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CDF2B1FD0C0F4005BDCCB /* newSynProjectTests.swift */; };
 		753CDF371FD0C0F4005BDCCB /* newSynProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CDF361FD0C0F4005BDCCB /* newSynProjectUITests.swift */; };
 		753CDF491FD72757005BDCCB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753CDF481FD72757005BDCCB /* ProfileViewController.swift */; };
-		754C20801FEAF33C006AB58C /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 754C207F1FEAF33C006AB58C /* ApiKeys.plist */; };
 		75A9A4C51FEF4430000F4A29 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9A4C41FEF4430000F4A29 /* FindViewController.swift */; };
 		75A9A4C71FF0D7E6000F4A29 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9A4C61FF0D7E6000F4A29 /* UserInfoViewController.swift */; };
 		75A9A4CB1FF2F8E6000F4A29 /* AddDocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9A4CA1FF2F8E6000F4A29 /* AddDocsViewController.swift */; };
 		75AA0E241FF4D65200DD73FE /* NodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA0E231FF4D65200DD73FE /* NodesViewController.swift */; };
 		75AA0E281FF59EBA00DD73FE /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA0E271FF59EBA00DD73FE /* TransactionViewController.swift */; };
+		75AA0E2A1FF607F500DD73FE /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75AA0E291FF607F500DD73FE /* ApiKeys.plist */; };
 		B4847982399BD5720459B742 /* Pods_newSynProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D66C3122EAFAEC98BE39B960 /* Pods_newSynProject.framework */; };
 		C092E2833A64E5A7C6C160FD /* Pods_newSynProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1132EBB3AFD15FF1E4BD1F35 /* Pods_newSynProjectUITests.framework */; };
 /* End PBXBuildFile section */
@@ -63,12 +63,12 @@
 		753CDF361FD0C0F4005BDCCB /* newSynProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newSynProjectUITests.swift; sourceTree = "<group>"; };
 		753CDF381FD0C0F4005BDCCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		753CDF481FD72757005BDCCB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		754C207F1FEAF33C006AB58C /* ApiKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		75A9A4C41FEF4430000F4A29 /* FindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindViewController.swift; sourceTree = "<group>"; };
 		75A9A4C61FF0D7E6000F4A29 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		75A9A4CA1FF2F8E6000F4A29 /* AddDocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDocsViewController.swift; sourceTree = "<group>"; };
 		75AA0E231FF4D65200DD73FE /* NodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodesViewController.swift; sourceTree = "<group>"; };
 		75AA0E271FF59EBA00DD73FE /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		75AA0E291FF607F500DD73FE /* ApiKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		90064287E086261AB3B8B82F /* Pods-newSynProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newSynProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newSynProject/Pods-newSynProject.debug.xcconfig"; sourceTree = "<group>"; };
 		A218BD94CD377A8F87896D63 /* Pods-newSynProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newSynProjectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-newSynProjectUITests/Pods-newSynProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BF468B80A2F90A81601BAB37 /* Pods-newSynProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-newSynProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-newSynProject/Pods-newSynProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 				753CDF1F1FD0C0F3005BDCCB /* LaunchScreen.storyboard */,
 				753CDF221FD0C0F3005BDCCB /* Info.plist */,
 				753CDF1A1FD0C0F3005BDCCB /* newSynProject.xcdatamodeld */,
-				754C207F1FEAF33C006AB58C /* ApiKeys.plist */,
+				75AA0E291FF607F500DD73FE /* ApiKeys.plist */,
 			);
 			path = newSynProject;
 			sourceTree = "<group>";
@@ -306,7 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				753CDF211FD0C0F3005BDCCB /* LaunchScreen.storyboard in Resources */,
-				754C20801FEAF33C006AB58C /* ApiKeys.plist in Resources */,
+				75AA0E2A1FF607F500DD73FE /* ApiKeys.plist in Resources */,
 				753CDF1E1FD0C0F3005BDCCB /* Assets.xcassets in Resources */,
 				753CDF191FD0C0F3005BDCCB /* Main.storyboard in Resources */,
 			);

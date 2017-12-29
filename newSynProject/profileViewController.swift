@@ -58,7 +58,7 @@ class ProfileViewController: UIViewController {
         self.userphLabel.text = phoneNumber[0] as? String
     }
 
-    // Function that handles request for oAuth Token
+    
     func oAuthUser(){
         
         let userToken = self.userData!["refresh_token"] as! String
@@ -77,24 +77,28 @@ class ProfileViewController: UIViewController {
             "X-SP-USER-IP": SPUSERIP
         ]
         
-        //urlstring creation
+        // Call to synaspefi API for oAuth
         let apiUrlString : String = "https://uat-api.synapsefi.com/v3.1/oauth/"
         let createdUserId = self.userData!["_id"] as! String
+
         let urlString = apiUrlString + createdUserId
     
-        //Alamofire call to get oAuth
-        Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON {
-            response in
-                let jsonData = response.result.value as! [String:AnyObject]
-                self.userReturnToken = jsonData
+
+        Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            let jsonData = response.result.value as! [String:AnyObject]
+//            print("#@#@#@@#@#@#@#@##@@#@#@#")
+//            print (jsonData)
+            self.userReturnToken = jsonData
+//            print("#@#@#@@#@#@#@#@##@@#@#@#")
         }
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
-    //Prepares data for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addUserDocs"{
             let addDocsDestinationVC = segue.destination as! AddDocsViewController

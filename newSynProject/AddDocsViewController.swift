@@ -88,7 +88,7 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         }
     }
 
-    //Function handles the api call
+    //Handles the api call
     func updateUser(){
         var bdayMonth :Int? = Int(dobMonthField.text!)
         var bdayDay :Int? = Int(dobDayField.text!)
@@ -119,6 +119,7 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
 
         let userToken = self.userAuthToken!["oauth_key"] as! String
         let oauthUser = userToken + SPUSER
+
         
         let headers: HTTPHeaders = [
             "X-SP-GATEWAY": SPGATEWAY,
@@ -219,7 +220,7 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         return true
     }
 
-    //Event triggers that checks bool and triggers api request
+    
     @IBAction func submitButtonPressed(_ sender: UIButton) {
         print ("Submit button presssed @#@#@#@#@#@#@#@#@#@#@")
         if confirmTextFieldsAreNotEmpty() == false || characterFieldLengthCheck() == false {
@@ -229,7 +230,6 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         }
     }
     
-    // Prepares data for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "nodeView"{
             let nodeDestinationVC = segue.destination as! NodesViewController

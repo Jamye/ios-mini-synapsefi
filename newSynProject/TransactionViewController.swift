@@ -26,14 +26,18 @@ class TransactionViewController: UITableViewController {
         super.viewDidLoad()
     }
     
-    //Fuction that handles the create transaction request
     func createTransaction(){
         
         let nodesArray = nodeResponse!["nodes"] as! NSArray
         let nodesDict = nodesArray[0] as! Dictionary<String,AnyObject>
+//        print("__________________________________________")
+//        print(nodesDict["_id"]!)
+//        print(nodesDict["user_id"]!)
+//        print("__________________________________________")
+        var currencyDouble :Double? = Double(amountTextField.text!)
+        
         let userId = nodesDict["user_id"]! as? String
         let nodeId = nodesDict["_id"]! as? String
-        var currencyDouble :Double? = Double(amountTextField.text!)
         
         let parameters: Parameters = [
             "to": [
@@ -61,7 +65,7 @@ class TransactionViewController: UITableViewController {
             "X-SP-USER-IP": SPUSERIP
         ]
         
-        //Creates the url string
+        // creates the url string
         let baseString = "https://uat-api.synapsefi.com/v3.1/users/"
         let midString = "/nodes/"
         let endString = "/trans"
@@ -71,12 +75,11 @@ class TransactionViewController: UITableViewController {
         Alamofire.request(urlString, method:.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON {
             response in
             switch response.result {
-                case .failure(let status):
-                    print (status)
-                    self.displayLabel.text = "Something went wrong. Please try agian later"
-                case .success(let value):
-//                    print (value)
-                    self.displayLabel.text = "Successfully Added"
+            case .failure(let status):
+                print (status)
+            case .success(let value):
+                print (value)
+                self.displayLabel.text = "Successfully Added"
             }
         }
     }

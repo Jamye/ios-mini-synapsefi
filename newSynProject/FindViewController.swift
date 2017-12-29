@@ -28,7 +28,6 @@ class FindViewController: UIViewController {
 
     }
     
-    // Function call to get user info with ID
     func getUserInfo() {
         let parameters: Parameters = [
             "user_id": userIdLabel.text!
@@ -45,29 +44,31 @@ class FindViewController: UIViewController {
             "X-SP-USER-IP": SPUSERIP
         ]
         
-        // Url String string creation
+        // Call to synaspefi API
         let apiString = "https://uat-api.synapsefi.com/v3.1/users/"
         let searchId = userIdLabel.text!
+        
         let urlString : String = apiString + searchId
-
-        // Alamofire request to API to get User information
+//        print(urlString)
+        
         Alamofire.request(urlString, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON {
             response in
             switch response.result {
                 case .failure:
+                    // handle errors (including `validate` errors) here
                     if let statusCode = response.response?.statusCode {
-//                        print (statusCode)
+                        print (statusCode)
                         self.showLabel.text! = "Something went wrong, please try again"
                         return
                   }
                 case .success(let value):
+                    // handle success here
                     self.userReturnResponse = value as! [String : Any]
                     self.performSegue(withIdentifier: "showUser", sender: self)
                 }
         }
     }
     
-    //Prepares data for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showUser"{
             let userDestinationVC = segue.destination as! UserInfoViewController
