@@ -88,7 +88,7 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         }
     }
 
-    //handles the api call
+    //Handles the api call
     func updateUser(){
         var bdayMonth :Int? = Int(dobMonthField.text!)
         var bdayDay :Int? = Int(dobDayField.text!)
@@ -116,10 +116,10 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         let SPGATEWAY = ViewController().valueForAPIKey(named:"GATEWAY")
         let SPUSER = ViewController().valueForAPIKey(named: "USER")
         let SPUSERIP = ViewController().valueForAPIKey(named: "USER-IP")
-        
 
         let userToken = self.userAuthToken!["oauth_key"] as! String
         let oauthUser = userToken + SPUSER
+
         
         let headers: HTTPHeaders = [
             "X-SP-GATEWAY": SPGATEWAY,
@@ -127,43 +127,33 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
             "X-SP-USER-IP": SPUSERIP
         ]
         
-        // creates the url string
+        //Creates the urlstring for request
         let id = self.userRes!["_id"] as! String
         let apiString = "https://uat-api.synapsefi.com/v3.1/users/"
-        let searchId = id
+        let urlString : String = apiString + id
         
-        let urlString : String = apiString + searchId
-        
-        //handles the api call
+        //Alamofire patch request to update Documents
         Alamofire.request(urlString, method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON {
             response in
-//                debugPrint(response)
-//                print("##############################")
-//                print (response)
-//                print("##############################")
             switch response.result {
-            case .failure(let status):
-//                handle errors (including `validate` errors) here
-                print (status)
-                if let statusCode = response.response?.statusCode {
-                    print (statusCode)
-                    if statusCode == 409 {
-                        self.errorLabel.text! = "Please enter full name with space"
-                    } else {
-                        self.errorLabel.text! = "Something went wrong, please try again later"
+                case .failure(let status):
+//                    print (status)
+                    if let statusCode = response.response?.statusCode {
+                        print (statusCode)
+                        if statusCode == 409 {
+                            self.errorLabel.text! = "Please enter full name with space"
+                        } else {
+                            self.errorLabel.text! = "Something went wrong, please try again later"
+                        }
+                        return
                     }
+                case .success(let value):
+//                    print (value)
+                    let valueResponse = value as? Dictionary<String, AnyObject>
+                    self.apiDocResponse = valueResponse
+                    self.errorLabel.text! = "Success"
+                    self.performSegue(withIdentifier: "nodeView", sender: self)
                     return
-                }
-            case .success(let value):
-                // handle success here
-//                print (value)
-                let valueResponse = value as? Dictionary<String, AnyObject>
-                self.apiDocResponse = valueResponse
-                self.errorLabel.text! = "Success"
-                self.performSegue(withIdentifier: "nodeView", sender: self)
-                return
-//                self.userReturnResponse = value as! [String : Any]
-//                self.performSegue(withIdentifier: "showUser", sender: self)
             }
         }
     }
@@ -209,6 +199,7 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
         }
     }
     
+    //Function that checks for charater length in specific fields
     func characterFieldLengthCheck()->Bool{
         if stateField.text!.count != 2 {
             showAlert(showMessage: "State must be two characters long")
@@ -231,7 +222,7 @@ class AddDocsViewController: UITableViewController, UIPickerViewDelegate, UIPick
 
     
     @IBAction func submitButtonPressed(_ sender: UIButton) {
-        print ("Submit button press @#@#@#@#@#@#@#@#@#@#@")
+        print ("Submit button presssed @#@#@#@#@#@#@#@#@#@#@")
         if confirmTextFieldsAreNotEmpty() == false || characterFieldLengthCheck() == false {
             showAlert(showMessage: "")
         } else {

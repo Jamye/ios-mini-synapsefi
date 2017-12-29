@@ -241,28 +241,6 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="More" id="sUB-g7-bTI">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="jOB-aB-pGM">
-                                        <rect key="frame" x="0.0" y="287.5" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jOB-aB-pGM" id="LCd-9E-gjR">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOS-9P-ai1">
-                                                    <rect key="frame" x="16" y="7" width="143" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Add Information"/>
-                                                    <connections>
-                                                        <action selector="addInfoPressed:" destination="X0p-bj-8ZX" eventType="touchUpInside" id="Ktj-zK-Z7H"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="X0p-bj-8ZX" id="Odr-ry-Ple"/>
@@ -274,7 +252,6 @@
                         <outlet property="idLabel" destination="FIS-Px-Ff8" id="Gbh-ph-7uH"/>
                         <outlet property="nameLabel" destination="uc9-b1-U0W" id="8DH-Ue-vvd"/>
                         <outlet property="phoneLabel" destination="1WU-DS-EOE" id="XeL-ER-Wgd"/>
-                        <segue destination="ubD-0E-cGT" kind="show" identifier="updateInfo" id="RGU-qb-rQw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FzZ-yl-CB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1278,30 +1255,11 @@
                                 </cells>
                             </tableViewSection>
                         </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="ubD-0E-cGT" id="6XF-H8-Iqg"/>
-                            <outlet property="delegate" destination="ubD-0E-cGT" id="chi-0Y-IPA"/>
-                        </connections>
                     </tableView>
-                    <connections>
-                        <outlet property="addressFieldText" destination="rYy-BG-1hX" id="b9W-jG-3ds"/>
-                        <outlet property="cityFieldText" destination="WSI-tL-7Cf" id="nX3-Hz-IBH"/>
-                        <outlet property="countryFieldText" destination="8ro-Bf-mgB" id="4fn-8c-2qF"/>
-                        <outlet property="dobDayFieldText" destination="WUg-dh-Czv" id="r4M-2a-tDW"/>
-                        <outlet property="dobMonthFieldText" destination="9sA-tz-Cur" id="fsO-9B-Pz2"/>
-                        <outlet property="dobYearFieldText" destination="VF2-DZ-CP2" id="quI-wF-ZRO"/>
-                        <outlet property="emailFieldText" destination="X6z-eI-VyZ" id="1XB-cQ-3E1"/>
-                        <outlet property="entityScopeFieldText" destination="FSK-Zl-Qg0" id="ZhL-vz-Ug0"/>
-                        <outlet property="entityTypeFieldText" destination="9cb-ll-ntF" id="Y7W-TZ-q3g"/>
-                        <outlet property="nameFieldText" destination="CB0-aC-1Mt" id="UmC-OE-wcX"/>
-                        <outlet property="phoneFieldText" destination="3DD-su-Idf" id="5mL-ce-txI"/>
-                        <outlet property="stateFieldText" destination="ONv-vx-hb6" id="W07-O7-vUl"/>
-                        <outlet property="zipFieldText" destination="kxm-RI-fqf" id="bMf-by-Los"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g8g-yN-Tyr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2004" y="906"/>
+            <point key="canvasLocation" x="2380" y="906"/>
         </scene>
     </scenes>
 </document>

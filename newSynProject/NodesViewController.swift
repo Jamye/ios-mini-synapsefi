@@ -35,7 +35,6 @@ class NodesViewController: UITableViewController {
         ]
         
         // Alamofire headers
-//        let SPGATEWAY = ViewController().valueForAPIKey(named:"GATEWAY")
         let SPUSER = ViewController().valueForAPIKey(named: "USER")
         let SPUSERIP = ViewController().valueForAPIKey(named: "USER-IP")
         
@@ -43,12 +42,11 @@ class NodesViewController: UITableViewController {
         let USER = userToken + SPUSER
         
         let headers: HTTPHeaders = [
-//            "X-SP-GATEWAY": SPGATEWAY,
             "X-SP-USER": USER,
             "X-SP-USER-IP": SPUSERIP
         ]
         
-        // creates the url string
+        //Creates the urlstring for api call
         let id = self.docResponse!["_id"] as! String
         let baseString = "https://uat-api.synapsefi.com/v3.1/users/"
         let endString = "/nodes"
