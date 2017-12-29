@@ -12,11 +12,12 @@ import Alamofire
 
 class NodesViewController: UITableViewController {
     
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var nicknameTextField: UITextField!
+    
     @IBAction func depositActButtonPressed(_ sender: UIButton) {
         createDepositNode()
     }
-    
-    @IBOutlet weak var nicknameTextField: UITextField!
     
     var docResponse: [String:Any]?
     var authToken: [String:Any]?
@@ -26,6 +27,7 @@ class NodesViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    //Function that handles api
     func createDepositNode(){
         let parameters: Parameters = [
             "type":"DEPOSIT-US",
@@ -55,30 +57,25 @@ class NodesViewController: UITableViewController {
         //API call to create the DEPOSIT-US node
         Alamofire.request(urlString, method:.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON {
             response in
-
             switch response.result {
                 case .failure(let status):
-            //                handle errors (including `validate` errors) here
                     print (status)
                     if let statusCode = response.response?.statusCode {
-                        print (statusCode)
-    //                    if statusCode == 409 {
-    //                        self.errorLabel.text! = "Please enter full name with space"
-    //                } else {
-    //                        self.errorLabel.text! = "Something went wrong, please try again later"
-    //                    }
-    //                    return
+//                        print (statusCode)
+                        self.statusLabel.text! = "Something went wrong, please try again later"
+                        return
                     }
                 case .success(let value):
-            // handle success here
-                    print (value)
+//                    print (value)
                     let valueObject = value as? Dictionary<String, AnyObject>
                     self.nodeObject = valueObject
                     self.performSegue(withIdentifier: "transactionView", sender: self)
+                    return
             }
         }
     }
     
+    //Prepares data to be passed through segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "transactionView"{
             let transDestinationVC = segue.destination as! TransactionViewController
@@ -86,9 +83,4 @@ class NodesViewController: UITableViewController {
             transDestinationVC.nodeAuthToken = authToken
         }
     }
-    
-    
-    
-    
-    
 }

@@ -30,6 +30,7 @@ class UserInfoViewController: UITableViewController {
         let userId = self.userInfo!["_id"] as! String
         let userName = self.userInfo!["legal_names"] as! NSArray
         
+        // Unwraps to display user information on TableViewController
         emailLabel.text = logins[0]["email"] as? String
         nameLabel.text = userName[0] as? String
         idLabel.text = userId
@@ -37,6 +38,7 @@ class UserInfoViewController: UITableViewController {
         reload()
     }
     
+    //Event handler that triggers segue
     @IBAction func addInfoPressed(_ sender: UIButton) {
         print("*******************")
         print("Add Information button pressed")
@@ -45,10 +47,6 @@ class UserInfoViewController: UITableViewController {
     
     func reload(){
         self.tableView?.reloadData()
-        print ("-----------------------------")
-//        print (userInfo)
-        print ("-----------------------------")
-
     }
 
 }
